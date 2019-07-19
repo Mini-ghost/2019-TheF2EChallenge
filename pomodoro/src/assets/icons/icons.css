@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "icons";
+    src: url("./icons.eot?33fc580832f8ccd04c48f1fd547859c3?#iefix") format("embedded-opentype"),
+url("./icons.woff2?33fc580832f8ccd04c48f1fd547859c3") format("woff2"),
+url("./icons.woff?33fc580832f8ccd04c48f1fd547859c3") format("woff"),
+url("./icons.ttf?33fc580832f8ccd04c48f1fd547859c3") format("truetype"),
+url("./icons.svg?33fc580832f8ccd04c48f1fd547859c3#icons") format("svg");
+}
+
+i[class^="icon-"]:before, i[class*=" icon-"]:before {
+    font-family: icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add:before {
+    content: "\f101";
+}
+.icon-analysis:before {
+    content: "\f102";
+}
+.icon-arrow:before {
+    content: "\f103";
+}
+.icon-list:before {
+    content: "\f104";
+}
+.icon-pause:before {
+    content: "\f105";
+}
+.icon-play:before {
+    content: "\f106";
+}
+.icon-reset:before {
+    content: "\f107";
+}
+.icon-ringtone:before {
+    content: "\f108";
+}
+.icon-start:before {
+    content: "\f109";
+}
+.icon-stop:before {
+    content: "\f10a";
+}

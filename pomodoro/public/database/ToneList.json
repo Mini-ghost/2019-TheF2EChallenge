@@ -1,0 +1,41 @@
+{
+  "work": [
+    {
+      "title": "Sunspots",
+      "select": false,
+      "URL": "./music/Sunspots.mp3"
+    },
+    {
+      "title": "Darkdub",
+      "select": false,
+      "URL": "./music/Darkdub.mp3"
+    },
+    {
+      "title": "Chunk",
+      "select": true,
+      "URL": "./music/Chunk.mp3"
+    },
+    {
+      "title": "Sunshine_in_My_Heart",
+      "select": false,
+      "URL": "./music/Sunshine_in_My_Heart.mp3"
+    }
+  ],
+  "break": [
+    {
+      "title": "Clash_of_Gods",
+      "select": false,
+      "URL": "./music/Clash_of_Gods.mp3"
+    },
+    {
+      "title": "Boreal",
+      "select": true,
+      "URL": "./music/Boreal.mp3"
+    },
+    {
+      "title": "1973",
+      "select": false,
+      "URL": "./music/1973.mp3"
+    }
+  ]
+}

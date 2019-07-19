@@ -1,0 +1,38 @@
+[
+  {
+    "title": "My First Task",
+    "tomato": 1,
+    "tomatoed": 1,
+    "isDone": true
+  },
+  {
+    "title": "My Second Task",
+    "tomato": 3,
+    "tomatoed": 2,
+    "isDone": false
+  }, 
+  {
+    "title": "My Third Task",
+    "tomato": 5,
+    "tomatoed": 3,
+    "isDone": false
+  },  
+  {
+    "title": "My Fourth Task",
+    "tomato": 7,
+    "tomatoed": 4,
+    "isDone": false
+  },  
+  {
+    "title": "My Fifth Task",
+    "tomato": 10,
+    "tomatoed": 5,
+    "isDone": false
+  },  
+  {
+    "title": "My Sixth Task",
+    "tomato": 2,
+    "tomatoed": 1,
+    "isDone": false
+  }
+]

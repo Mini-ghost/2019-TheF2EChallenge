@@ -1,0 +1,15 @@
+@function rem($pixels, $context: $fz-base)
+	@if (unitless($pixels))
+		$pixels: $pixels * 1px
+	@if (unitless($context))
+		$context: $context * 1px
+	@return $pixels / $context * 1rem
+
+@function theme-color($key: 'primary')
+	@return map-get($theme-colors, $key)
+
+@function type-color($key: 'success')
+	@return map-get($type-colors, $key)
+
+@function bg-color($key: 'primary')
+	@return map-get($background-colors, $key)

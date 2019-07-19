@@ -1,0 +1,50 @@
+@mixin input-init
+	background-color: transparent
+	border: none
+	outline: none
+	color: inherit
+	font: inherit
+
+@mixin container-init($mw: 1600px, $w: 95%)
+	max-width: $mw
+	width: $w
+	margin:
+		right: auto
+		left: auto
+
+@mixin flex($jcfa: flex-start, $ais: stretch)
+	display: flex
+	justify-content: $jcfa
+	align-items: $ais
+
+
+@mixin flexCenter
+	display: flex
+	justify-content: center
+	align-items: center
+	
+@mixin absCenter
+	position: absolute
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+	margin: auto
+
+@mixin scrollbar($color: theme-color())
+	overflow-x: hidden
+	overflow-y: auto !important
+	&::-webkit-scrollbar
+		background-color: transparent
+		width: 6px
+	&::-webkit-scrollbar-thumb
+		background-color: lighten($color, 10%)
+	&::-webkit-scrollbar-track
+		width: 6px
+		background-color: trasnparent
+
+@mixin isoScrolling
+	-webkit-overflow-scrolling: touch
+
+@mixin isoScrollingChild
+	-webkit-overflow-scrolling: auto
