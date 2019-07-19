@@ -16,7 +16,7 @@
               v-for="(task, id) in showList", 
               :task="task"
               :style="'transition-delay: ' + id * 0.15 + 's;'", 
-              :key="task.id"
+              :key="Math.random()*100"
             )
 </template>
 
