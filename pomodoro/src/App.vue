@@ -44,9 +44,6 @@ export default class App extends Vue {
 %input-init
   @include input-init
 
-%flex-init
-  @include flex
-
 html
     font-family: $font
     background-color: bg-color()
@@ -65,7 +62,7 @@ button
   cursor: pointer
 
 #app
-  @extend %flex-init
+  @include flex
   flex-direction: row-reverse
 
 .container
@@ -74,6 +71,8 @@ button
 .mt
   &-large
     margin-top: 5vw
+  &-medium
+    margin-top: 2.6042vw
   &-small
     margin-top: 1.25vw
 

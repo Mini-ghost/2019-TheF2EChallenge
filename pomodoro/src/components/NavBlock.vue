@@ -100,7 +100,6 @@ export default class NavBlock extends Vue {
   transition: .3s
 
 .nav
-  height: 100vh
   max-width: 100%
   background-color: bg-color(secondary)
   color: $white

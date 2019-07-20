@@ -2,18 +2,22 @@
   main.main
     .main-container.container
       transition(name='fade-in-main', mode="out-in", v-if="task", appear)
-        .main-content()
+        .main-content(:class="working? 'main-content--work' : 'main-content--break'")
           .main-task.fz-24.fw-bold {{task.title}}
           Progress.mt-small(
             :size="'large'", 
-            :tomato="{tomato: task.tomato, tomatoed: task.tomatoed}")
-          PieChart(:id="this.task.id")
-          .ctrl
+            :tomato="{tomato: task.tomato, tomatoed: task.tomatoed}",
+          )
+          .tag.fz-12.fw-lighter.mt-small
+            .tag-group
+              span.tag-group__item BREAK
+          PieChart.mt-medium(:id="this.task.id")
+          .ctrl.mt-medium
             .ctrl-group
               i.icon-play.ctrl-group__item(@click="ctrlHandler('play')", :class="{'ctrl-group__item--active': audioType === 'play'}")
               i.icon-pause.ctrl-group__item(@click="ctrlHandler('pause')", :class="{'ctrl-group__item--active': audioType === 'pause'}")
               i.icon-reset.ctrl-group__item(@click="ctrlHandler('reset')", :class="{'ctrl-group__item--active': audioType === 'reset'}")
-          .complete.fz-14.fw-bold
+          .complete.fz-14.fw-bold.mt-medium
             label.complete__label
               input.complete__input(type="checkbox")
               .complete-item(@click="completeTaskHandler")
@@ -28,7 +32,7 @@
             source(:src="music.URL" type="audio/mpeg")
       //- 區分一下
       transition(name='fade-in-main', mode="out-in", v-else, appear)
-        .main-content()
+        .main-content
           .main-title
             h1.main-title__text.main-title__text--white.fz-24.fw-lighter POMODORO
             img.main-title__image(src="./../assets/images/tomato_small_color.svg", alt="POMODORO")
@@ -98,11 +102,12 @@ export default class MainBlock extends Vue {
   }
 
   completeTaskHandler(event: MouseEvent) {
-    this.$store.commit('FINISH_TASK_ALL', this.task.id)
     const dom: HTMLLabelElement | any = event.currentTarget
+    this.$store.commit('FINISH_TASK_ALL', this.task.id)
+    this.$store.commit('MainStore/CHANGE_AUDIO_TYPE', 'reset')
     setTimeout(()=>{
       dom.previousElementSibling.checked = false
-    }, 1000)
+    }, 1300) // 打勾勾延遲
   } // 完成一組 TASK
 
   ctrlHandler(type: string) {
@@ -160,43 +165,17 @@ export default class MainBlock extends Vue {
 .title
   margin-top: 5vw
   @extend %usn
-
-// 圖表部分
-.pieChart
-  width: 90%
-  max-width: 300px
-  margin:
-    top: 5vw
-    right: auto
-    left: auto
-  @extend %por
-  font-size: 0
-  &-svg
-    @extend %width_100
-    &__underlay, &__overlay
-      fill: transparent
-    &__underlay
-      stroke: #acacac
-    &__overlay
-      &--work
-        stroke: theme-color()
-      &--break
-        stroke: type-color()
-  &-timmer
-    @include absCenter
-    @include flexCenter
-    @extend %usn
-    background-color: $white
-    border-radius: 50%
-    z-index: -1
     
 .ctrl
   width: 90%
   max-width: 300px
   margin:
-    top: 5vw
     right: auto
     left: auto
+ 
+  //   display: none
+  // .main-content--break &
+    display: block
   &-group
     display: flex
     justify-content: space-between
@@ -214,12 +193,30 @@ export default class MainBlock extends Vue {
       @extend %usn
       @extend %transition
       &:hover
-        color: rgba(theme-color(), .8)
+        .main-content--work &
+          color: rgba(theme-color(), .8)
+        .main-content--break &
+          color: rgba(type-color(), .8)
       &#{&}--active
+        .main-content--work &
           color: theme-color()
+        .main-content--break &
+          color: type-color()
+
+.tag
+  color: $white
+  .main-content--work &
+    display: none
+  .main-content--break &
+    display: block
+  &-group
+    &__item
+      display: inline-block
+      padding: 1px 16px 2px 17px
+      background-color: type-color()
+      border-radius: 1rem
 
 .complete
-  margin-top: 5vw
   &__label
     cursor: pointer
   &__input

@@ -1,6 +1,10 @@
 <template lang="pug">
   .pieChart
-    svg.pieChart-svg(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 100 100")
+    svg.pieChart-svg(
+        xmlns="http://www.w3.org/2000/svg",
+        viewBox="0 0 100 100",
+        :class="svgTypeClass"
+      )
       circle.pieChart-svg__underlay(
         cx="50", 
         cy="50",
@@ -16,7 +20,6 @@
         :stroke-width="chart.width", 
         :stroke-dasharray="chart.dasharray", 
         :stroke-dashoffset="dashoffset",
-        :class="chartClassType",
       )
     .pieChart-timmer.fz-40.fw-bold {{countdown}}
 </template>
@@ -75,8 +78,8 @@ export default class PicChart extends Vue {
     return `${min} : ${sec}`;
   } // 秒數轉時間
 
-  get chartClassType(): string {
-    const preClass: string = 'pieChart-svg__overlay'
+  get svgTypeClass(): string {
+    const preClass: string = 'pieChart-svg'
     return `${ preClass }--${ this.working? 'work' : 'break' }` ;
   } // SVG 顏色 class
 
@@ -183,15 +186,18 @@ export default class PicChart extends Vue {
   font-size: 0
   &-svg
     width: 100%
-    transform: rotate(-90deg)
+    &--work
+      transform: rotate3d(-1, 1, 0, 180deg)
+    &--break
+      transform: rotate(-90deg)
     &__underlay, &__overlay
       fill: transparent
     &__underlay
       stroke: #acacac
     &__overlay
-      &--work
+      .main-content--work & 
         stroke: theme-color()
-      &--break
+      .main-content--break &
         stroke: type-color()
   &-timmer
     @include absCenter

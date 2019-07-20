@@ -1,10 +1,14 @@
 <template lang="pug">
-  form.form(:class="formTypeClass")
+  form.form(:class="formTypeClass" @submit.prevent)
     .form-item
       .form-item__title TASK TITLE
       .form-item__warp
         label.form-item__label
-          input.form-item__input(type="text", placeholder="My Second Task", v-model.trim="taskTitle")
+          input.form-item__input(
+            type="text",
+            placeholder="My Second Task",
+            v-model.trim="taskTitle"
+          )
     .form-item
       .form-item__title ESTIMATED TOMOTO
       .form-item__warp

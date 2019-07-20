@@ -23,6 +23,10 @@ export default class Progress extends Vue {
 @import ./../assets/sass/variable/include
 
 .progress
+  .main-content--work &
+    display: block
+  .main-content--break &
+    display: none
   &-grup
     &__item
       display: inline-block
