@@ -1,0 +1,21 @@
+$font: 'Lato', PingFangTC, "Avenir", Helvetica, Arial , sans-serif, 微軟正黑體
+$font-list: (fz: 12 14 20 24 26 36 40 52, fw: normal bold bolder lighter)
+
+$fz-list: map-get($font-list, 'fz')
+$fw-list: map-get($font-list, 'fw')
+
+@for $i from 1 through length($fz-list)
+	$fz: nth($fz-list, $i)
+	.fz-#{$fz}
+		font-size: #{$fz}px
+		font-size: rem($fz)
+@for $i from 1 through length($fz-list)
+	$fz: nth($fz-list, $i)
+	@media (max-width: 419.98px)
+		.fz-#{$fz}--ms
+			font-size: #{$fz}px
+			font-size: rem($fz)
+@for $i from 1 through length($fw-list)
+	$fw: nth($fw-list, $i)
+	.fw-#{$fw}
+		font-weight: $fw

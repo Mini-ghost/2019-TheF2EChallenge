@@ -1,0 +1,23 @@
+$fz-base: 16;
+
+$white: #fcfcfc;
+
+$theme-colors: (
+  primary: #ea5548,
+  secondary: #316901,
+  light: #b5e254,
+  font: #222222
+);
+
+// 參考 vuetify
+$type-colors: (
+  success: #b5e254,
+  info: #17a2b8,
+  warning: #fb8c00,
+  danger: #ff5252
+);
+
+$background-colors: (
+  primary: #e2e2e2,
+  secondary: map-get($theme-colors, 'font')
+);
