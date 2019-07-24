@@ -1,9 +1,16 @@
 <template lang="pug">
   .card
     .card-group(:class="regionClass")
-      .card-group__item(v-for="(item, id) in quantity")
+      .card-group__item(v-for="(item, id) in quantity" @mouseenter="mouseenterHandler(region + id)")
         .card-content
-          CardItem(v-for="(card, _id) in cardsArray[id]" :group="id" :index="_id" :card="card")
+          CardItem(
+            v-for="(card, _id) in cardsArray[id]",
+            :group="id",
+            :index="_id",
+            :card="card"
+            :key="card.code + card.num"
+            :quantity="cardsArray[id].length"
+            )
 </template>
 
 <script lang="ts">
@@ -37,6 +44,10 @@ export default class CardBlock extends Vue {
     });
     return array;
   }
+
+  mouseenterHandler(data: string) {
+    // console.log(data)
+  }
 }
 </script>
 
@@ -47,6 +58,8 @@ export default class CardBlock extends Vue {
   &-group
     width: 100%
     @include flex(space-between)
+    &--playregion
+      height: 100%
     &__item
       width: 9.7vw
       max-width: 120px
@@ -54,7 +67,7 @@ export default class CardBlock extends Vue {
         width: 1px
         style: solid
         radius: 5px
-      .card-group--provisiona &
+      .card-group--cache &
         border-color: #fcfcfc
       .card-group--complete &
         border-color: #fcfcfc
@@ -64,6 +77,7 @@ export default class CardBlock extends Vue {
         height: 100%
   &-content
     width: 100%
+    max-width: 120px
     position: relative
     padding-bottom: 152.6316%
 </style>

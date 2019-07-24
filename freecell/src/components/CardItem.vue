@@ -18,6 +18,18 @@ export default class CardBlock extends Vue {
   @Prop() private group!: number;
   @Prop() private index!: number;
   @Prop() private card!: CardsConfig;
+  @Prop() private quantity!: number
+
+  target: HTMLDivElement | EventTarget | undefined = undefined
+
+  get _id(): number {
+    return this.group + this.index * 8
+  }
+
+  get cardCanDrag(): boolean {
+    if(this.index === (this.quantity - 1)) return true
+    return false;
+  }
 
   get isDrag(): boolean {
     return this.$store.state.FreeCellStore.isDrag;
@@ -32,40 +44,29 @@ export default class CardBlock extends Vue {
   }
 
   get cardStyle() {
-    let BGI = require(`./../assets/image/cards/${this.card.code +
-      this.card.num}.png`);
+    let BGI = require(`./../assets/image/cards/${this.card.code + 
+    this.card.num}.png`);
     return `top: ${30 * this.index}px; background-image: url(${BGI});`;
   }
 
   mousedownHandler(e: MouseEvent) {
-    this.$store.commit('SET_TARGET', e.target);
+    this.$store.commit('FreeCellStore/SET_TARGET', e.target);
   }
 
   mousemoveHandler(e: MouseEvent) {
-    if (!this.isDrag) return;
-    let target = <HTMLDivElement>e.currentTarget;
-    this.$nextTick(() => {
-      target.style.top = `${this.targetPos.y +
-        e.pageY -
-        this.mousedowbPos.y}px`;
-      target.style.left = `${this.targetPos.x +
-        e.pageX -
-        this.mousedowbPos.x}px`;
-      target.style.zIndex = '999';
-    });
+    if (!this.isDrag || !this.cardCanDrag) return
+    let target = <HTMLDivElement>this.$store.state.FreeCellStore.target;
+
+    //- 改動 dom
+    let top = `${this.targetPos.y + e.pageY - this.mousedowbPos.y}px`;
+    let left = `${this.targetPos.x + e.pageX - this.mousedowbPos.x}px`;
+    this.$store.commit('FreeCellStore/SET_DOM_POS', { top, left })
   }
 
   mouseupHandler(e: MouseEvent) {
-    let target = <HTMLDivElement>e.currentTarget;
-    this.$nextTick(() => {
-      target.style.top = `${this.targetPos.y +
-        e.pageY -
-        this.mousedowbPos.y}px`;
-      target.style.left = `${this.targetPos.x +
-        e.pageX -
-        this.mousedowbPos.x}px`;
-      target.style.zIndex = null;
-    });
+    let target = <HTMLDivElement>this.$store.state.FreeCellStore.target;
+    this.$store.commit('FreeCellStore/MOUSE_UP');
+    this.$store.commit('FreeCellStore/SET_TARGET', undefined);
   }
 }
 </script>
@@ -79,12 +80,12 @@ export default class CardBlock extends Vue {
     top: 0
     left: 0
     width: 100%
-    height: 100%
+    padding-bottom: 152.6316%
     background-color: #fcfcfc
     overflow: hidden
     background-size: cover
     background-repeat: no-repeat
-    border: 0.5px solid rgba(#bababa, .5)
+    border: 1px solid rgba(#bababa, .5)
       radius: 5px
 
 </style>

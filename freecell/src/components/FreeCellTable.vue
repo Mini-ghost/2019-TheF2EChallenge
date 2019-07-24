@@ -1,14 +1,32 @@
 <template lang="pug">
-  main.playTable(v-if="isMounted", @mousedown="mousedownHandler", @mouseup="mouseupHandler")
+  main.playTable(
+    v-if="isMounted",
+    @mousedown="mousedownHandler",
+    @mouseup="mouseupHandler"
+  )
     .playTable-container.container
-      .playTable-wrap
-        CardBlock.playTable-table(:quantity="4", :region="'provisiona'", :card-data="provisiona")
+      //- 上排
+      .playTable-wrap.playTable-wrap--head
+        CardBlock.playTable-table(
+          :quantity="4", 
+          :region="'cache'", 
+          :card-data="cacheCards"
+        )
         .playTable-logo
           img.playTable-logo__image(src="./../assets/image/king_happy.png", alt="FreeCell 新接龍")
           h1.playTable-logo__title.fz-14.fw-bold FREECELL
-        CardBlock.playTable-table(:quantity="4", :region="'complete'", :card-data="complete")
-      .playTable-wrap
-        CardBlock.playTable-table(:quantity="8", :region="'playregion'", :card-data="playregion")
+        CardBlock.playTable-table(
+          :quantity="4", 
+          :region="'complete'", 
+          :card-data="completeCards"
+        )
+      //- 下排
+      .playTable-wrap.playTable-wrap--body
+        CardBlock.playTable-table(
+          :quantity="8",
+          :region="'playregion'",
+          :card-data="playregionCards"
+        )
 </template>
 
 <script lang="ts">
@@ -49,20 +67,16 @@ export default class FreeCellTable extends Vue {
     return this.$store.state.FreeCellStore.cards;
   }
 
-  get provisiona(): CardsConfig[] {
-    return this.filterCardHandler('provisiona');
+  get cacheCards(): CardsConfig[] {
+    return this.filterCardHandler('cache');
   }
 
-  get complete(): CardsConfig[] {
+  get completeCards(): CardsConfig[] {
     return this.filterCardHandler('complete');
   }
 
-  get playregion(): CardsConfig[] {
+  get playregionCards(): CardsConfig[] {
     return this.filterCardHandler('playregion');
-  }
-
-  created() {
-    this.$store.registerModule('FreeCellStore', FreeCellStore); // 註冊模組
   }
 
   mounted() {
@@ -92,14 +106,17 @@ export default class FreeCellTable extends Vue {
 @import ./../assets/sass/variable/include
 
 .playTable
-  height: 100%
+  height: calc(100% - 80px)
   width: 100%
   &-container
     padding: 2.604167vw 0.78125vw
+    height: 100%
   &-wrap
     @include flex(space-between)
     & + &
       margin-top: 30px
+    &--body
+      height: 100%
   &-table
     width: 100%
   &-logo

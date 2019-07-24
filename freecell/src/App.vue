@@ -1,23 +1,39 @@
 <template lang="pug">
   #app
     FreeCellTable
-    MainConsole
+    Console
+    LightBox(v-if="!!this.$store.state.FreeCellStore.lightBox")
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
 // components
-import MainConsole from './components/MainConsole.vue';
 import FreeCellTable from './components/FreeCellTable.vue';
+import Console from './components/Console.vue';
+import LightBox from './components/LightBox.vue';
+
+import FreeCellStore from '@/FreeCellStore';
 
 @Component({
   components: {
     FreeCellTable,
-    MainConsole
+    Console,
+    LightBox
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+
+  created() {
+    this.$store.registerModule('FreeCellStore', FreeCellStore); // 註冊模組
+  }
+
+
+  // mounted() {
+  //   this.isLightBoxInit = !!this.$store.state.FreeCellStore.lightBox
+  // }
+
+}
 </script>
 
 <style lang="sass">

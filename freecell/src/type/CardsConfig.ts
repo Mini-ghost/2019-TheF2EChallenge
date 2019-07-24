@@ -1,5 +1,5 @@
 export type CardsConfig = {
-  num?: number,
+  num: number,
   name: string,
   code: string,
   color: string

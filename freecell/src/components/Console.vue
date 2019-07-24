@@ -2,7 +2,7 @@
   aside.console
     .console-container.container
       .console-scoring
-        .console-scoring__item.console-scoring__image
+        button.console-scoring__item.console-scoring__image(@click="ruleLightboxHandler('rule')")
           img(src='./../assets/image/info.svg', alt="FreeCell Rule")
         .console-scoring__item.console-scoring__time.fz-14.fw-bold TIME：00:00
         .console-scoring__item.console-scoring__score.fz-14.fw-bold SCORE：100
@@ -18,7 +18,12 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class MainConsole extends Vue {}
+export default class Console extends Vue {
+
+  ruleLightboxHandler(target: string) {
+    this.$store.commit('FreeCellStore/SET_LIGHTBOX', target)
+  }
+}
 </script>
 
 <style lang="sass">
@@ -30,6 +35,7 @@ export default class MainConsole extends Vue {}
   left: 0
   right: 0
   width: 100%
+  max-height: 80px 
   &-container
     display: flex
     justify-content: space-between
